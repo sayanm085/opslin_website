@@ -1,9 +1,22 @@
 import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import { CookieBanner } from "@/components/gdpr/cookie-banner";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import "./globals.css";
 
 const siteUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://opslin.shotlin.in");
+
+const geistSans = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
@@ -12,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Turn your VPS into a managed deployment platform with Git deploys, SSL, logs, monitoring, databases, and rollback from one dashboard.",
+    "Coordinate application deployments and common infrastructure operations on a compatible Linux VPS through Opslin's managed control plane and outbound Go agent.",
   keywords: [
     "VPS deployment",
     "DevOps automation",
@@ -30,7 +43,7 @@ export const metadata: Metadata = {
     url: siteUrl.toString(),
     siteName: "Opslin",
     title: "Opslin — Deploy and manage apps on your own VPS",
-    description: "Turn your VPS into a managed deployment platform.",
+    description: "A managed control plane for application deployments and selected operations on compatible customer-controlled Linux VPSs.",
     images: [
       {
         url: "/opengraph-image",
@@ -43,7 +56,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Opslin — Deploy and manage apps on your own VPS",
-    description: "Turn your VPS into a managed deployment platform.",
+    description: "A managed control plane for application deployments and selected operations on compatible customer-controlled Linux VPSs.",
     images: ["/opengraph-image"],
   },
   robots: { index: true, follow: true },
@@ -59,7 +72,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">
+      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
         <ErrorBoundary>
           <div className="min-h-screen bg-background text-foreground">{children}</div>
           <CookieBanner />

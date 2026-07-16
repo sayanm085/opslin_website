@@ -1,7 +1,7 @@
 import { ArrowRight, Check } from "lucide-react";
 import { siteLinks } from "@/lib/site-links";
 
-const plans = [
+export const pricingPlans = [
   {
     name: "Free Beta",
     price: 0,
@@ -33,7 +33,7 @@ export function PricingCards() {
   return (
     <>
       <div className="pricing-grid">
-        {plans.map((plan) => (
+        {pricingPlans.map((plan) => (
           <article key={plan.name} className={plan.featured ? "pricing-card pricing-card-featured" : "pricing-card"}>
             <div className="flex items-center justify-between gap-3">
               <h3 className="text-base font-semibold">{plan.name}</h3>

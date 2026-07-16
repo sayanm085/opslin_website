@@ -40,7 +40,7 @@ export function SiteHeader() {
             <ArrowUpRight className="size-4" aria-hidden="true" />
           </a>
         </div>
-        <details className="site-mobile-menu sm:hidden">
+        <details className="site-mobile-menu lg:hidden">
           <summary aria-label="Open navigation menu">
             <span aria-hidden="true" />
             <span aria-hidden="true" />

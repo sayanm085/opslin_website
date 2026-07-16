@@ -1,4 +1,5 @@
 import { HomePage } from "@/components/site/home-page";
+import { pricingPlans } from "@/components/site/pricing-cards";
 import { siteLinks } from "@/lib/site-links";
 
 const structuredData = {
@@ -9,27 +10,14 @@ const structuredData = {
   operatingSystem: "Linux",
   url: siteLinks.landing,
   description:
-    "Opslin turns your Linux server into a managed deployment platform with Git deploys, SSL, logs, monitoring, databases, and rollback from one browser dashboard.",
-  offers: [
-    {
-      "@type": "Offer",
-      name: "Free Beta",
-      price: "0",
-      priceCurrency: "INR",
-    },
-    {
-      "@type": "Offer",
-      name: "Starter",
-      price: "352.82",
-      priceCurrency: "INR",
-    },
-    {
-      "@type": "Offer",
-      name: "Pro",
-      price: "799",
-      priceCurrency: "INR",
-    },
-  ],
+    "Opslin coordinates application deployments and selected infrastructure operations on compatible customer-controlled Linux VPSs through a managed control plane and outbound Go agent.",
+  offers: pricingPlans.map((plan) => ({
+    "@type": "Offer",
+    name: plan.name,
+    price: String(plan.price),
+    priceCurrency: "INR",
+    description: `${plan.summary} Listed base price; applicable tax is disclosed on the pricing page.`,
+  })),
 };
 
 export default function LandingPage() {
