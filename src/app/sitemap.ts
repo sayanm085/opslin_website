@@ -2,11 +2,23 @@ import type { MetadataRoute } from "next";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://opslin.shotlin.in";
 
-// Only routes that actually exist in this app — /docs, /pricing, and
-// /transparency belong to opslin-dashboard (and the separate docs/ Nextra
-// site), not this project, now that the surfaces are split.
 const routes = [
   "",
+  "/services",
+  "/services/deployments",
+  "/services/observability",
+  "/services/security",
+  "/services/databases",
+  "/pricing",
+  "/demo",
+  "/about",
+  "/how-it-works",
+  "/frameworks",
+  "/vps-providers",
+  "/docs",
+  "/quick-start",
+  "/faq",
+  "/acceptable-use",
   "/privacy",
   "/terms",
 ];

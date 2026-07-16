@@ -13,13 +13,17 @@ const contentSecurityPolicy = [
   "style-src 'self' 'unsafe-inline'",
   `connect-src 'self' https://cloudflareinsights.com${ANALYTICS_URL ? ` ${ANALYTICS_URL}` : ""}`,
   "img-src 'self' data: https:",
-  "font-src 'self' https://fonts.gstatic.com",
+  "font-src 'self' data:",
   "frame-ancestors 'none'",
   "base-uri 'self'",
 ].join("; ");
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  allowedDevOrigins: ["127.0.0.1"],
+  experimental: {
+    optimizePackageImports: ["lucide-react", "framer-motion"],
+  },
   async headers() {
     return [{
       source: "/(.*)",

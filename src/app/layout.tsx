@@ -1,27 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import { CookieBanner } from "@/components/gdpr/cookie-banner";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import "./globals.css";
-
-const geistSans = Geist({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-geist-sans",
-});
-
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-geist-mono",
-});
 
 const siteUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://opslin.shotlin.in");
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: "Opslin — Deploy and manage apps on your own VPS",
+  title: {
+    default: "Opslin — Deploy apps on your own VPS",
+    template: "%s",
+  },
   description:
     "Turn your VPS into a managed deployment platform with Git deploys, SSL, logs, monitoring, databases, and rollback from one dashboard.",
   keywords: [
@@ -58,6 +47,9 @@ export const metadata: Metadata = {
     images: ["/opengraph-image"],
   },
   robots: { index: true, follow: true },
+  applicationName: "Opslin",
+  category: "developer tools",
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({
@@ -66,20 +58,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`} suppressHydrationWarning>
-        <Script
-          id="strip-extension-hydration-attrs"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html:
-              "document.querySelectorAll('[bis_skin_checked]').forEach(function (element) { element.removeAttribute('bis_skin_checked'); });",
-          }}
-        />
+    <html lang="en">
+      <body className="font-sans antialiased">
         <ErrorBoundary>
-          <div className="landing-theme min-h-screen bg-[#F7F4EE] text-zinc-950">
-            {children}
-          </div>
+          <div className="min-h-screen bg-background text-foreground">{children}</div>
           <CookieBanner />
         </ErrorBoundary>
       </body>

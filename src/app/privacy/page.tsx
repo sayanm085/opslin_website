@@ -1,43 +1,16 @@
-import Link from "next/link";
+import type { Metadata } from "next";
+import { LegalPage, LegalSection } from "@/components/site/legal-page";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata("Privacy Policy — Opslin", "How Opslin processes account, infrastructure, operational, and billing data.", "/privacy");
 
 export default function PrivacyPage() {
-    return (
-        <main className="min-h-screen bg-background px-6 py-12 text-foreground">
-            <div className="mx-auto max-w-3xl space-y-8">
-                <div className="space-y-3">
-                    <Link href="/" className="text-sm font-medium text-primary">Opslin</Link>
-                    <h1 className="text-4xl font-semibold tracking-tight">Privacy Policy</h1>
-                    <p className="text-muted-foreground">Last updated: April 26, 2026</p>
-                </div>
-
-                <section className="space-y-3">
-                    <h2 className="text-xl font-semibold">Data We Process</h2>
-                    <p className="text-muted-foreground">
-                        Opslin stores account details, organization membership, server metadata, deployment records, billing plan state, and operational logs needed to run the platform.
-                    </p>
-                </section>
-
-                <section className="space-y-3">
-                    <h2 className="text-xl font-semibold">GitHub And Infrastructure Access</h2>
-                    <p className="text-muted-foreground">
-                        Repository access is limited to the GitHub App installation permissions granted by the user. Server access is handled through the Opslin agent token and encrypted platform credentials.
-                    </p>
-                </section>
-
-                <section className="space-y-3">
-                    <h2 className="text-xl font-semibold">Payments</h2>
-                    <p className="text-muted-foreground">
-                        Paid plan checkout is handled by Razorpay. Opslin records subscription and invoice metadata, including base amount, GST, total amount, payment status, and invoice identifiers.
-                    </p>
-                </section>
-
-                <section className="space-y-3">
-                    <h2 className="text-xl font-semibold">Retention And Rights</h2>
-                    <p className="text-muted-foreground">
-                        Organization owners may request data export or deletion by contacting support. Operational audit records may be retained where required for security, abuse prevention, or tax compliance.
-                    </p>
-                </section>
-            </div>
-        </main>
-    );
+  return (
+    <LegalPage title="Privacy Policy" updated="April 26, 2026" intro="This policy explains the information Opslin needs to operate its deployment control plane and how that information is handled.">
+      <LegalSection title="Data we process"><p>Opslin stores account details, organization membership, server metadata, deployment records, billing plan state, and operational logs needed to run the platform.</p></LegalSection>
+      <LegalSection title="GitHub and infrastructure access"><p>Repository access is limited to the GitHub App installation permissions granted by the user. Server access is handled through the Opslin agent token and encrypted platform credentials.</p></LegalSection>
+      <LegalSection title="Payments"><p>Paid plan checkout is handled by Razorpay. Opslin records subscription and invoice metadata, including base amount, GST, total amount, payment status, and invoice identifiers.</p></LegalSection>
+      <LegalSection title="Retention and rights"><p>Organization owners may request data export or deletion by contacting support. Operational audit records may be retained where required for security, abuse prevention, or tax compliance.</p></LegalSection>
+    </LegalPage>
+  );
 }
