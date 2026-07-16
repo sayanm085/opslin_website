@@ -2,6 +2,7 @@ import { ArrowUpRight, Mail } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Brand } from "@/components/site/brand";
+import { ThemeToggle } from "@/components/site/theme-toggle";
 import { siteLinks } from "@/lib/site-links";
 
 const navigation = [
@@ -32,32 +33,35 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <div className="hidden items-center gap-2 sm:flex">
-          <a href={siteLinks.login} className="site-button site-button-ghost">
-            Log in
-          </a>
-          <a href={siteLinks.register} className="site-button site-button-glass">
-            Start free
-            <ArrowUpRight className="size-4" aria-hidden="true" />
-          </a>
-        </div>
-        <details className="site-mobile-menu lg:hidden">
-          <summary aria-label="Open navigation menu">
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-          </summary>
-          <div className="site-mobile-panel">
-            {navigation.map((item) => (
-              <Link key={item.href} href={item.href}>
-                {item.label}
-              </Link>
-            ))}
-            <a href={siteLinks.login}>Log in</a>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <div className="hidden items-center gap-2 sm:flex">
+            <a href={siteLinks.login} className="site-button site-button-ghost">
+              Log in
+            </a>
             <a href={siteLinks.register} className="site-button site-button-glass">
               Start free
+              <ArrowUpRight className="size-4" aria-hidden="true" />
             </a>
           </div>
-        </details>
+          <details className="site-mobile-menu lg:hidden">
+            <summary aria-label="Open navigation menu">
+              <span aria-hidden="true" />
+              <span aria-hidden="true" />
+            </summary>
+            <div className="site-mobile-panel">
+              {navigation.map((item) => (
+                <Link key={item.href} href={item.href}>
+                  {item.label}
+                </Link>
+              ))}
+              <a href={siteLinks.login}>Log in</a>
+              <a href={siteLinks.register} className="site-button site-button-glass">
+                Start free
+              </a>
+            </div>
+          </details>
+        </div>
       </div>
     </header>
   );

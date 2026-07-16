@@ -27,7 +27,7 @@ const details: Runtime[] = ([
 ] as Array<[string, string, string, string[], string[]]>).map(([id, title, description, examples, expectations]) => ({ asset: runtimeAssets.find((asset) => asset.id === id)!, title, status: "available-beta" as const, description, examples, expectations }));
 
 const staticRuntime: Runtime = {
-  asset: { id: "static", name: "Static", monogram: "</>", sourceUrl: "", accessibleLabel: "Static site", trademarkStatus: "generic mark" },
+  asset: { id: "static", name: "Static", monogram: "</>", sourceUrl: "", accessibleLabel: "Static site", trademarkStatus: "generic mark", category: "generic", logoPlate: "neutral" },
   title: "Static sites", status: "available-beta", description: "Static HTML and generated front-end output served from the connected server.", examples: ["HTML / CSS / JavaScript", "Generated static output", "Custom domain workflow"], expectations: ["Select the correct output directory", "Confirm client-side routing needs"],
 };
 

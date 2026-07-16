@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { BrandMark } from "@/components/site/brand-mark";
+import { ResponsibilityBoundary } from "@/components/site/responsibility-boundary";
 import { providerAssets, providerIdFromSlug, type ProviderId } from "@/lib/brand-assets";
 import type { Comparison } from "@/lib/comparisons";
 
@@ -43,6 +44,7 @@ export function ProviderComparison({ comparisons, initialProvider = "coolify", m
           <div><p className="site-kicker">Opslin vs {comparison.provider}</p><h3>Compare responsibility—not a universal score.</h3><p>{comparison.directAnswer}</p></div>
           <div className="comparison-meta"><span>{comparison.category}</span><span>Reviewed {formatDate(comparison.reviewedAt)}</span></div>
         </header>
+        {mode === "hub" ? <ResponsibilityBoundary comparison={comparison} /> : null}
         <div className="comparison-matrix">
           <div className="comparison-matrix-head"><span>Decision area</span><span>Opslin</span><span>{comparison.provider}</span></div>
           {comparison.dimensions.slice(0, mode === "compact" ? 4 : 12).map((dimension) => <div className="comparison-row" key={dimension.label}><strong>{dimension.label}</strong><div><small>Opslin</small>{dimension.opslin}</div><div><small>{comparison.provider}</small>{dimension.alternative}</div></div>)}

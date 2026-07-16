@@ -81,6 +81,17 @@
   --opslin-glass-highlight: rgba(255, 255, 255, 0.55);
   --opslin-glass-shadow: 0 8px 32px rgba(13, 23, 18, 0.1);
 
+  --opslin-metallic-shadow: #515b55;
+  --opslin-metallic-base: #aeb8b1;
+  --opslin-metallic-highlight: #f8faf8;
+  --opslin-metallic-reflection: rgba(255, 255, 255, 0.72);
+  --opslin-emerald-top-light: rgba(34, 197, 94, 0.34);
+  --opslin-stage-glass-bg: rgba(255, 255, 255, 0.8);
+  --opslin-stage-glass-edge: rgba(21, 128, 61, 0.2);
+  --opslin-logo-plate-bg: #f7faf7;
+  --opslin-logo-plate-border: rgba(13, 23, 18, 0.12);
+  --opslin-logo-plate-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 6px 18px rgba(13, 23, 18, 0.1);
+
   /* Dark-mode-only: a single static, pre-composited radial glow (no
      animation/blur cost) for the whitelisted hero surfaces in doc 02 §3.5.
      none in light mode — light has no ambient-glow treatment. */
@@ -246,6 +257,17 @@
   --opslin-glass-border: rgba(244, 247, 244, 0.1);
   --opslin-glass-highlight: rgba(244, 247, 244, 0.06);
   --opslin-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+
+  --opslin-metallic-shadow: #657069;
+  --opslin-metallic-base: #b7c0ba;
+  --opslin-metallic-highlight: #ffffff;
+  --opslin-metallic-reflection: rgba(255, 255, 255, 0.82);
+  --opslin-emerald-top-light: rgba(74, 222, 128, 0.38);
+  --opslin-stage-glass-bg: rgba(16, 26, 21, 0.82);
+  --opslin-stage-glass-edge: rgba(74, 222, 128, 0.24);
+  --opslin-logo-plate-bg: #f7faf7;
+  --opslin-logo-plate-border: rgba(244, 247, 244, 0.18);
+  --opslin-logo-plate-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92), 0 8px 22px rgba(0, 0, 0, 0.35);
 
   /* Static pre-composited radial (no animation, no blur cost) — doc 02 §3.5.
      --glow-x/--glow-y let a whitelisted surface reposition the glow's

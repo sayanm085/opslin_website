@@ -11,7 +11,12 @@ export function EvergreenStage({ asset, children, caption, priority = false, cla
     <figure className={`evergreen-stage ${className}`}>
       <div className="evergreen-stage-inner">
         <ParticleField />
-        {asset ? <Image className="evergreen-stage-image" src={asset.path} alt={asset.decorative ? "" : asset.alt} width={asset.width} height={asset.height} priority={priority} sizes="(max-width: 768px) 94vw, (max-width: 1280px) 86vw, 1200px" /> : null}
+        {asset ? (
+          <>
+            <Image className={`evergreen-stage-image${asset.darkPath ? " visual-asset-light" : ""}`} src={asset.path} alt={asset.decorative ? "" : asset.alt} width={asset.width} height={asset.height} priority={priority} sizes="(max-width: 768px) 94vw, (max-width: 1280px) 86vw, 1200px" />
+            {asset.darkPath ? <Image className="evergreen-stage-image visual-asset-dark" src={asset.darkPath} alt={asset.decorative ? "" : asset.alt} width={asset.width} height={asset.height} priority={priority} sizes="(max-width: 768px) 94vw, (max-width: 1280px) 86vw, 1200px" /> : null}
+          </>
+        ) : null}
         {children ? <div className="evergreen-stage-content">{children}</div> : null}
       </div>
       {caption ? <figcaption>{caption}</figcaption> : null}

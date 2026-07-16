@@ -72,7 +72,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
 export function ServiceOverviewCard({ href, title, description, icon: Icon, visualKind }: { href: string; title: string; description: string; icon: LucideIcon; visualKind: ServiceContent["visualKind"] }) {
   return (
     <Link href={href} className="service-overview-card">
-      <div className="flex items-center justify-between"><div className="bento-icon"><Icon className="size-5" aria-hidden="true" /></div><span className="site-badge">Interactive story</span></div>
+      <div className="flex items-center justify-between"><div className="bento-icon"><Icon className="size-5" aria-hidden="true" /></div><span className="site-badge">Local product preview</span></div>
       <ServiceVisual kind={visualKind} compact />
       <h2>{title}</h2>
       <p>{description}</p>

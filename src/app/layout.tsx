@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { CookieBanner } from "@/components/gdpr/cookie-banner";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -17,6 +17,21 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   display: "swap",
 });
+
+const themeBootstrap = `(() => {
+  const root = document.documentElement;
+  try {
+    const stored = localStorage.getItem("opslin-color-theme");
+    const theme = stored === "light" || stored === "dark" ? stored : "dark";
+    root.classList.toggle("dark", theme === "dark");
+    root.dataset.theme = theme;
+    root.style.colorScheme = theme;
+  } catch {
+    root.classList.add("dark");
+    root.dataset.theme = "dark";
+    root.style.colorScheme = "dark";
+  }
+})();`;
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
@@ -65,13 +80,21 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
 };
 
+export const viewport: Viewport = {
+  colorScheme: "dark light",
+  themeColor: "#0b1310",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark" data-theme="dark" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
+      </head>
       <body className={`${geistSans.className} ${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ErrorBoundary>
           <div className="min-h-screen bg-background text-foreground">{children}</div>

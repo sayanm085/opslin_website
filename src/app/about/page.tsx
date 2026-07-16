@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Compass, Server, ShieldCheck } from "lucide-react";
+import Image from "next/image";
 import { SiteShell } from "@/components/site/site-shell";
 import { createMetadata } from "@/lib/metadata";
-import { EvergreenStage } from "@/components/site/evergreen-stage";
 import { visualAssets } from "@/lib/visual-assets";
 
 export const metadata: Metadata = createMetadata(
@@ -21,7 +21,7 @@ export default function AboutPage() {
           <p className="page-lead mt-6 max-w-2xl">Opslin is a bootstrapped SaaS platform from India, built to automate repetitive deployment and server operations without pretending infrastructure stops requiring judgment.</p>
         </div>
       </section>
-      <section className="site-section"><div className="site-container visual-split"><div className="visual-copy"><p className="site-kicker">The product story</p><h2>Own the runtime. Calm the recurring work.</h2><p>The idea is not to erase infrastructure responsibility. It is to give small teams a clearer control plane for the deployment and server operations they repeatedly perform.</p></div><EvergreenStage asset={visualAssets.controlPlane} caption="Opslin’s managed control plane and customer-controlled VPS are intentionally shown as separate operating zones." /></div></section>
+      <section className="site-section"><div className="site-container visual-split"><div className="visual-copy"><p className="site-kicker">The product story</p><h2>Own the runtime. Calm the recurring work.</h2><p>The idea is not to erase infrastructure responsibility. It is to give small teams a clearer control plane for the deployment and server operations they repeatedly perform.</p></div><figure className="founder-story-visual"><span className="founder-story-object founder-story-agent"><Image src={visualAssets.agentBeacon.path} alt={visualAssets.agentBeacon.alt} width={visualAssets.agentBeacon.width} height={visualAssets.agentBeacon.height} sizes="(max-width: 768px) 42vw, 16rem" /><b>Outbound agent</b></span><i aria-hidden="true" /><span className="founder-story-object founder-story-server"><Image src={visualAssets.serverNode.path} alt={visualAssets.serverNode.alt} width={visualAssets.serverNode.width} height={visualAssets.serverNode.height} sizes="(max-width: 768px) 42vw, 16rem" /><b>Customer-controlled VPS</b></span><figcaption>The agent initiates the work channel; the application runtime remains on the compatible server the customer controls.</figcaption></figure></div></section>
       <section className="site-section site-section-tinted">
         <div className="site-container grid gap-5 md:grid-cols-3">
           {[

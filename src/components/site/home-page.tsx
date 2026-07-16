@@ -20,34 +20,22 @@ import Link from "next/link";
 import { Brand } from "@/components/site/brand";
 import { BrandMark } from "@/components/site/brand-mark";
 import { CapabilityLedger } from "@/components/site/capability-ledger";
-import { CapabilityVisual, type CapabilityVisualKind } from "@/components/site/capability-visuals";
 import { OperationsLab } from "@/components/site/operations-lab";
 import { EvergreenStage } from "@/components/site/evergreen-stage";
+import { HeroDevOpsField } from "@/components/site/hero-devops-field";
 import { OwnedInfrastructureStory } from "@/components/site/owned-infrastructure-story";
 import { PricingCards } from "@/components/site/pricing-cards";
+import { ProductWorkbench } from "@/components/site/product-workbench";
 import { ProviderComparison } from "@/components/site/provider-comparison";
+import { RevealGroup, RevealItem } from "@/components/site/scroll-reveal";
 import { SiteShell } from "@/components/site/site-shell";
 import { WorkflowSimulator } from "@/components/site/workflow-simulator";
+import { Marquee } from "@/components/magic-ui/marquee";
 import { siteLinks } from "@/lib/site-links";
 import { runtimeAssets } from "@/lib/brand-assets";
 import { visualAssets } from "@/lib/visual-assets";
 import { publicCapabilityLedger } from "@/lib/capability-ledger";
 import { comparisons } from "@/lib/comparisons";
-
-const capabilities: Array<{
-  title: string;
-  description: string;
-  icon: typeof GitBranch;
-  kind: CapabilityVisualKind;
-  className: string;
-}> = [
-  { title: "Push to deploy", description: "Connect Git or upload source, choose a compatible server, and follow the normal deployment lifecycle.", icon: GitBranch, kind: "deploy", className: "bento-card bento-wide" },
-  { title: "Own the runtime", description: "Applications and supported databases run on the Linux VPS you select and remain your infrastructure responsibility.", icon: Server, kind: "runtime", className: "bento-card" },
-  { title: "Operate with context", description: "Review health, infrastructure metrics, logs, and configured alerts beside the resource that produced them.", icon: Activity, kind: "observability", className: "bento-card" },
-  { title: "Domains and SSL", description: "Coordinate supported DNS, reverse-proxy, and certificate workflows while retaining ownership of the domain.", icon: Globe2, kind: "domain", className: "bento-card" },
-  { title: "Database operations", description: "Provision PostgreSQL, MySQL, MongoDB, or Redis on an eligible connected server and keep operational context nearby.", icon: Database, kind: "database", className: "bento-card bento-wide" },
-  { title: "Guarded access", description: "Organization roles, API authorization, and authenticated agent work create explicit operational boundaries.", icon: ShieldCheck, kind: "access", className: "bento-card" },
-];
 
 const fragmentedTools = [
   ["Repository", GitBranch],
@@ -96,12 +84,8 @@ export function HomePage() {
   return (
     <SiteShell>
       <section className="hero-section">
-        <div className="hero-stars" aria-hidden="true">
-          <Sparkles className="hero-star hero-star-one" />
-          <Sparkles className="hero-star hero-star-two" />
-          <span className="hero-orbit" />
-        </div>
-        <div className="site-container relative pt-16 sm:pt-24 lg:pt-28">
+        <HeroDevOpsField />
+        <div className="site-container relative pt-12 sm:pt-16 lg:pt-20">
           <div className="mx-auto max-w-4xl text-center">
             <div className="site-eyebrow">
               <span className="live-pulse" aria-hidden="true" />
@@ -146,10 +130,10 @@ export function HomePage() {
       </section>
 
       <section className="site-section">
-        <div className="site-container visual-split">
-          <div className="visual-copy"><p className="site-kicker">The operating boundary</p><h2>A managed control plane. An outbound path. Your server.</h2><p>Opslin coordinates supported work without moving your application runtime onto Opslin-owned compute. The agent initiates its connection from the compatible VPS you control.</p><ul className="visual-checks"><li><Check />Dashboard and API remain in Opslin’s managed control plane.</li><li><Check />The Go agent dials out from the VPS.</li><li><Check />Applications and supported databases stay on customer-selected infrastructure.</li></ul></div>
-          <EvergreenStage asset={visualAssets.controlPlane} priority caption="Atmospheric architecture illustration. Product labels and claims remain in the surrounding HTML." />
-        </div>
+        <RevealGroup className="site-container visual-split">
+          <RevealItem><div className="visual-copy"><p className="site-kicker">The operating boundary</p><h2>A managed control plane. An outbound path. Your server.</h2><p>Opslin coordinates supported work without moving your application runtime onto Opslin-owned compute. The agent initiates its connection from the compatible VPS you control.</p><ul className="visual-checks"><li><Check />Dashboard and API remain in Opslin’s managed control plane.</li><li><Check />The Go agent dials out from the VPS.</li><li><Check />Applications and supported databases stay on customer-selected infrastructure.</li></ul></div></RevealItem>
+          <RevealItem><EvergreenStage asset={visualAssets.controlPlane} priority caption="Atmospheric architecture illustration. Product labels and claims remain in the surrounding HTML." /></RevealItem>
+        </RevealGroup>
       </section>
 
       <section className="trust-strip" aria-label="Current product scope">
@@ -182,15 +166,7 @@ export function HomePage() {
       <section id="features" className="site-section site-section-tinted">
         <div className="site-container">
           <SectionHeading kicker="Product, not placeholders" title="Every capability should show what a user can actually understand and control." description="These code-native product scenes are illustrative examples. They explain the workflow without pretending to be live customer data." align="left" />
-          <div className="bento-grid mt-10 sm:mt-14">
-            {capabilities.map(({ icon: Icon, kind, ...capability }) => (
-              <article key={capability.title} className={capability.className}>
-                <div className="flex items-center justify-between gap-3"><div className="bento-icon"><Icon className="size-5" aria-hidden="true" /></div><span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">Illustrative interface</span></div>
-                <CapabilityVisual kind={kind} />
-                <h3>{capability.title}</h3><p>{capability.description}</p>
-              </article>
-            ))}
-          </div>
+          <RevealGroup className="mt-10 sm:mt-12"><RevealItem><ProductWorkbench /></RevealItem></RevealGroup>
         </div>
       </section>
 
@@ -224,7 +200,7 @@ export function HomePage() {
         <div className="site-container">
           <div className="compatibility-band">
             <div><p className="site-kicker text-brand-bright">Supported runtime targets</p><h2>Bring the application. Validate the environment.</h2><p>Support describes runtime targets, not a guarantee for every framework version, package, operating system, architecture, or server configuration.</p></div>
-            <div className="runtime-brand-cloud">{runtimeAssets.filter((asset) => asset.id !== "docker").map((asset) => <BrandMark key={asset.id} asset={asset} />)}<BrandMark asset={{ id: "static", name: "Static", monogram: "</>", sourceUrl: "", accessibleLabel: "Static sites", trademarkStatus: "generic mark" }} /></div>
+            <Marquee className="runtime-brand-cloud" label="Supported runtime targets">{runtimeAssets.filter((asset) => asset.id !== "docker").map((asset) => <BrandMark key={asset.id} asset={asset} />)}<BrandMark asset={{ id: "static", name: "Static", monogram: "</>", sourceUrl: "", accessibleLabel: "Static sites", trademarkStatus: "generic mark", category: "generic", logoPlate: "neutral" }} /></Marquee>
             <Link href="/frameworks" className="site-button site-button-glass">Review compatibility<ArrowRight className="size-4" /></Link>
           </div>
         </div>

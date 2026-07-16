@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BookOpen, Boxes, CircleHelp, CreditCard, Database, Network, Rocket, Server } from "lucide-react";
 import { Notice, ResourceCard, ResourceCta, ResourceHero, ResourcePage, ResourceSection } from "@/components/site/resource-page";
+import { DocsNavigator } from "@/components/site/docs-navigator";
 import { createMetadata } from "@/lib/metadata";
 import { siteLinks } from "@/lib/site-links";
 
@@ -19,7 +20,7 @@ const sections = [
 export default function DocsGatewayPage() {
   return <ResourcePage>
     <ResourceHero eyebrow="Documentation" title="Find the next answer without losing the system around it." description="Start with the public guide that matches your task, then move into the detailed Opslin documentation for exact setup and troubleshooting steps." aside={<><BookOpen className="size-6 text-brand" aria-hidden="true" /><p className="mt-4">This page is a documentation gateway. Detailed, versioned procedures live in the separate Opslin documentation site.</p></>} />
-    <ResourceSection eyebrow="Task navigator" title="Begin with the outcome, then inspect the exact procedure." tinted><div className="docs-command-window"><header><i/><i/><i/><span>opslin docs navigator</span></header><div><code>$ choose-task --safe-first-deploy</code><p><span>01</span>Check server prerequisites</p><p><span>02</span>Generate account-specific agent setup</p><p><span>03</span>Deploy and verify a simple application</p><p><span>04</span>Review cleanup and recovery access</p><small>Illustrative navigation only · not an executable command</small></div></div></ResourceSection>
+    <ResourceSection eyebrow="Task navigator" title="Begin with the outcome, then inspect the exact procedure." tinted><DocsNavigator /></ResourceSection>
     <ResourceSection eyebrow="Browse by task" title="From first connection to ongoing operations." description="The documentation is organized around the resource and outcome you are working with.">
       <div className="resource-grid">{sections.map((section) => <ResourceCard key={section.title} {...section} />)}</div>
     </ResourceSection>
