@@ -2,6 +2,7 @@ import type { LucideIcon } from "lucide-react";
 import { Activity, Boxes, Database, GitBranch, KeyRound, Radar, RotateCcw, ShieldCheck } from "lucide-react";
 
 export type ServiceContent = {
+  visualKind: "deployment" | "observability" | "security" | "databases";
   eyebrow: string;
   title: string;
   description: string;
@@ -13,6 +14,7 @@ export type ServiceContent = {
 
 export const services: Record<string, ServiceContent> = {
   deployments: {
+    visualKind: "deployment",
     eyebrow: "Deployments",
     title: "From Git push to a healthy app on your VPS.",
     description:
@@ -32,6 +34,7 @@ export const services: Record<string, ServiceContent> = {
     ],
   },
   observability: {
+    visualKind: "observability",
     eyebrow: "Observability",
     title: "Know what your apps and servers are doing.",
     description:
@@ -51,6 +54,7 @@ export const services: Record<string, ServiceContent> = {
     ],
   },
   security: {
+    visualKind: "security",
     eyebrow: "Security",
     title: "A control plane designed around infrastructure ownership.",
     description:
@@ -70,6 +74,7 @@ export const services: Record<string, ServiceContent> = {
     ],
   },
   databases: {
+    visualKind: "databases",
     eyebrow: "Databases",
     title: "Provision and operate common databases beside your apps.",
     description:

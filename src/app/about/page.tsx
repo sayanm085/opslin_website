@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Compass, Server, ShieldCheck } from "lucide-react";
 import { SiteShell } from "@/components/site/site-shell";
 import { createMetadata } from "@/lib/metadata";
+import { EvergreenStage } from "@/components/site/evergreen-stage";
+import { visualAssets } from "@/lib/visual-assets";
 
 export const metadata: Metadata = createMetadata(
   "About — Opslin",
@@ -19,6 +21,7 @@ export default function AboutPage() {
           <p className="page-lead mt-6 max-w-2xl">Opslin is a bootstrapped SaaS platform from India, built to automate repetitive deployment and server operations without pretending infrastructure stops requiring judgment.</p>
         </div>
       </section>
+      <section className="site-section"><div className="site-container visual-split"><div className="visual-copy"><p className="site-kicker">The product story</p><h2>Own the runtime. Calm the recurring work.</h2><p>The idea is not to erase infrastructure responsibility. It is to give small teams a clearer control plane for the deployment and server operations they repeatedly perform.</p></div><EvergreenStage asset={visualAssets.controlPlane} caption="Opslin’s managed control plane and customer-controlled VPS are intentionally shown as separate operating zones." /></div></section>
       <section className="site-section site-section-tinted">
         <div className="site-container grid gap-5 md:grid-cols-3">
           {[
@@ -38,6 +41,7 @@ export default function AboutPage() {
             <h2 className="mt-3 text-3xl font-semibold tracking-tight">Built closely with the operational reality of early customers.</h2>
             <p className="mt-5 text-base leading-7 text-muted-foreground">Opslin is founded by Sayan Mondal and remains bootstrapped. Product claims on this website are intentionally checked against the working platform, with in-build capabilities kept separate from shipped workflows.</p>
           </div>
+          <ol className="founder-timeline"><li><span>01</span><div><strong>Start from the ownership problem</strong><p>Keep applications on infrastructure selected by the customer.</p></div></li><li><span>02</span><div><strong>Build one operational thread</strong><p>Connect deployments, health, logs, domains, and selected data operations.</p></div></li><li><span>03</span><div><strong>Validate in a live beta</strong><p>Keep current limits visible while early customer workflows and support practices mature.</p></div></li></ol>
         </div>
       </section>
     </SiteShell>

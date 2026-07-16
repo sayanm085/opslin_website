@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { CheckList, Notice, ResourceCta, ResourceHero, ResourcePage, ResourceSection, StepCard } from "@/components/site/resource-page";
 import { createMetadata } from "@/lib/metadata";
 import { siteLinks } from "@/lib/site-links";
+import { QuickStartChecklist } from "@/components/site/interactive-labs";
 
 export const metadata: Metadata = createMetadata("Quick Start — Deploy with Opslin", "Prepare a compatible test VPS, connect the Opslin agent, and deploy a first application with clear verification steps.", "/quick-start");
 
 export default function QuickStartPage() {
   return <ResourcePage>
     <ResourceHero eyebrow="Quick start" title="Deploy a first application without guessing what success looks like." description="Use a non-critical test VPS and a simple supported application. The dashboard will provide the account-specific installation and deployment controls." aside={<><strong className="text-foreground">Before you begin</strong><CheckList items={["An Opslin account with verified email", "A compatible Linux VPS with a public IP", "Administrative access and provider recovery access", "A small application repository you are authorized to deploy"]} /></>} />
+    <ResourceSection eyebrow="Preparation lab" title="Confirm the safe starting boundary." description="This browser-only checklist does not inspect infrastructure or save credentials." tinted><QuickStartChecklist /></ResourceSection>
     <ResourceSection eyebrow="Guided setup" title="Five steps to a verifiable first release." description="Do not paste generic agent tokens or credentials from a website. Generate the current, server-specific flow inside your authenticated dashboard.">
       <div className="resource-step-list">
         <StepCard number="01" title="Create and verify your account" description="Register, verify your email, and enter the Opslin dashboard."><CheckList items={["Expected: the dashboard loads for your organization", "If blocked: complete email verification before creating resources"]} /></StepCard>

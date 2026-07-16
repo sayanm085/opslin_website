@@ -2,6 +2,7 @@ import { ArrowUpRight, Check, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { SiteShell } from "@/components/site/site-shell";
+import { RevealGroup, RevealItem } from "@/components/site/scroll-reveal";
 
 export function ResourcePage({ children }: { children: ReactNode }) {
   return <SiteShell>{children}</SiteShell>;
@@ -26,12 +27,12 @@ export function ResourceSection({ eyebrow, title, description, children, tinted 
   return (
     <section className={`site-section${tinted ? " site-section-tinted" : ""}`}>
       <div className="site-container">
-        <div className="max-w-3xl">
+        <RevealGroup><RevealItem className="max-w-3xl">
           {eyebrow ? <p className="site-kicker">{eyebrow}</p> : null}
           <h2 className="site-heading mt-3">{title}</h2>
           {description ? <p className="site-description mt-4">{description}</p> : null}
-        </div>
-        <div className="mt-10">{children}</div>
+        </RevealItem>
+        <RevealItem className="mt-10">{children}</RevealItem></RevealGroup>
       </div>
     </section>
   );

@@ -17,15 +17,22 @@ import {
   TerminalSquare,
 } from "lucide-react";
 import Link from "next/link";
+import { Brand } from "@/components/site/brand";
+import { BrandMark } from "@/components/site/brand-mark";
 import { CapabilityLedger } from "@/components/site/capability-ledger";
 import { CapabilityVisual, type CapabilityVisualKind } from "@/components/site/capability-visuals";
 import { OperationsLab } from "@/components/site/operations-lab";
+import { EvergreenStage } from "@/components/site/evergreen-stage";
 import { OwnedInfrastructureStory } from "@/components/site/owned-infrastructure-story";
 import { PricingCards } from "@/components/site/pricing-cards";
+import { ProviderComparison } from "@/components/site/provider-comparison";
 import { SiteShell } from "@/components/site/site-shell";
 import { WorkflowSimulator } from "@/components/site/workflow-simulator";
 import { siteLinks } from "@/lib/site-links";
+import { runtimeAssets } from "@/lib/brand-assets";
+import { visualAssets } from "@/lib/visual-assets";
 import { publicCapabilityLedger } from "@/lib/capability-ledger";
+import { comparisons } from "@/lib/comparisons";
 
 const capabilities: Array<{
   title: string;
@@ -64,6 +71,18 @@ const homepageCapabilityIds = new Set([
 
 const homepageCapabilities = publicCapabilityLedger.filter((capability) => homepageCapabilityIds.has(capability.id));
 
+const homepageComparisons = comparisons.map((comparison) => ({
+  slug: comparison.slug,
+  provider: comparison.provider,
+  category: comparison.category,
+  directAnswer: comparison.directAnswer,
+  reviewedAt: comparison.reviewedAt,
+  dimensions: comparison.dimensions,
+  opslinFit: comparison.opslinFit,
+  alternativeFit: comparison.alternativeFit,
+  opslinLimitations: comparison.opslinLimitations,
+}));
+
 const faqs = [
   ["Does Opslin host my applications?", "No. Opslin operates a managed control plane while your application workloads run on the compatible VPS you connect."],
   ["Does the agent need an inbound management port?", "The agent initiates its persistent connection from the VPS. A public agent-management port is not required for that connection."],
@@ -77,41 +96,59 @@ export function HomePage() {
   return (
     <SiteShell>
       <section className="hero-section">
-        <div className="hero-stars" aria-hidden="true"><Sparkles className="hero-star hero-star-one" /><Sparkles className="hero-star hero-star-two" /><span className="hero-orbit" /></div>
-        <div className="site-container relative py-14 sm:py-20 lg:py-24">
-          <div className="hero-layout">
-            <div className="hero-copy-column">
-              <div className="site-eyebrow"><span className="live-pulse" aria-hidden="true" />Live beta · Customer-controlled VPS</div>
-              <h1 className="hero-title">Your server. <span>One calm control plane.</span></h1>
-              <p className="hero-copy">
-                Opslin coordinates application deployments and common infrastructure operations through an outbound Go agent—while the runtime stays on a compatible Linux VPS you control.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a href={siteLinks.register} className="site-button site-button-primary site-button-lg">Start free beta<ArrowRight className="size-4" aria-hidden="true" /></a>
-                <Link href="/demo" className="site-button site-button-secondary site-button-lg">Try the interactive example</Link>
-              </div>
-              <div className="hero-trust-list">
-                {["No credit card", "Workloads run on your VPS", "Outbound agent connection"].map((item) => <span key={item}><Check className="size-3.5" aria-hidden="true" />{item}</span>)}
-              </div>
-              <p className="hero-beta-note"><ShieldCheck className="size-4" aria-hidden="true" />Opslin automates repetitive operations. It does not replace architecture, security, capacity planning, backups, or incident response.</p>
+        <div className="hero-stars" aria-hidden="true">
+          <Sparkles className="hero-star hero-star-one" />
+          <Sparkles className="hero-star hero-star-two" />
+          <span className="hero-orbit" />
+        </div>
+        <div className="site-container relative pt-16 sm:pt-24 lg:pt-28">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="site-eyebrow">
+              <span className="live-pulse" aria-hidden="true" />
+              Live beta · Bring your own VPS
             </div>
-
-            <div className="hero-command-center">
-              <div className="hero-command-chrome">
-                <div className="flex gap-1.5" aria-hidden="true"><span /><span /><span /></div>
-                <p>Interactive deployment example</p>
-                <div className="hero-command-status"><span />Local simulation</div>
-              </div>
-              <WorkflowSimulator />
-              <div className="hero-signal-caption">
-                <span><CloudCog className="size-4" />Opslin coordinates</span>
-                <ArrowRight className="size-3.5" />
-                <span><ShieldCheck className="size-4" />Agent carries work</span>
-                <ArrowRight className="size-3.5" />
-                <span><Server className="size-4" />Your VPS runs it</span>
-              </div>
+            <h1 className="hero-title">
+              Deploy applications on <span>infrastructure you control.</span>
+            </h1>
+            <p className="hero-copy">
+              Opslin coordinates Git or source-upload deployments, supported routing and SSL, logs, metrics, databases, and rollback through a managed control plane while workloads run on your compatible Linux VPS.
+            </p>
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a href={siteLinks.register} className="site-button site-button-glass site-button-lg">
+                Start free beta
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </a>
+              <Link href="/demo" className="site-button site-button-secondary site-button-lg">
+                Try interactive demo
+              </Link>
+            </div>
+            <div className="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground sm:text-sm">
+              {["No credit card", "Workloads run on your VPS", "Outbound agent connection"].map((item) => (
+                <span key={item} className="inline-flex items-center gap-1.5">
+                  <Check className="size-3.5 text-brand" aria-hidden="true" />
+                  {item}
+                </span>
+              ))}
             </div>
           </div>
+
+          <div className="hero-product-frame">
+            <div className="hero-product-topbar">
+              <Brand inverse />
+              <div className="flex items-center gap-2">
+                <span className="demo-topbar-chip hidden sm:inline-flex">Interactive example</span>
+                <span className="demo-topbar-chip">Local simulation</span>
+              </div>
+            </div>
+            <WorkflowSimulator />
+          </div>
+        </div>
+      </section>
+
+      <section className="site-section">
+        <div className="site-container visual-split">
+          <div className="visual-copy"><p className="site-kicker">The operating boundary</p><h2>A managed control plane. An outbound path. Your server.</h2><p>Opslin coordinates supported work without moving your application runtime onto Opslin-owned compute. The agent initiates its connection from the compatible VPS you control.</p><ul className="visual-checks"><li><Check />Dashboard and API remain in Opslin’s managed control plane.</li><li><Check />The Go agent dials out from the VPS.</li><li><Check />Applications and supported databases stay on customer-selected infrastructure.</li></ul></div>
+          <EvergreenStage asset={visualAssets.controlPlane} priority caption="Atmospheric architecture illustration. Product labels and claims remain in the surrounding HTML." />
         </div>
       </section>
 
@@ -187,22 +224,20 @@ export function HomePage() {
         <div className="site-container">
           <div className="compatibility-band">
             <div><p className="site-kicker text-brand-bright">Supported runtime targets</p><h2>Bring the application. Validate the environment.</h2><p>Support describes runtime targets, not a guarantee for every framework version, package, operating system, architecture, or server configuration.</p></div>
-            <div className="runtime-cloud">{["Node.js", "Python", "Go", "PHP", "Ruby", "Java", "Rust", "Static"].map((runtime) => <span key={runtime}>{runtime}</span>)}</div>
-            <Link href="/frameworks" className="site-button site-button-light">Review compatibility<ArrowRight className="size-4" /></Link>
+            <div className="runtime-brand-cloud">{runtimeAssets.filter((asset) => asset.id !== "docker").map((asset) => <BrandMark key={asset.id} asset={asset} />)}<BrandMark asset={{ id: "static", name: "Static", monogram: "</>", sourceUrl: "", accessibleLabel: "Static sites", trademarkStatus: "generic mark" }} /></div>
+            <Link href="/frameworks" className="site-button site-button-glass">Review compatibility<ArrowRight className="size-4" /></Link>
           </div>
         </div>
       </section>
 
       <section className="site-section site-section-tinted">
         <div className="site-container">
-          <SectionHeading kicker="Choose by operating model" title="No platform is the right answer for every workload." description="Opslin should be compared by responsibility, control, maturity, and current requirements—not by a universal winner score." />
-          <div className="operating-model-grid mt-10 sm:mt-14">
-            <article><span>Managed cloud</span><h3>Provider operates the runtime</h3><p>Strong when the team wants managed compute, scaling, storage, and platform services without administering a VPS.</p></article>
-            <article><span>Self-hosted control plane</span><h3>You operate the platform too</h3><p>Strong when open-source control-plane ownership is a firm requirement and the team can operate it.</p></article>
-            <article><span>Manual VPS</span><h3>Maximum bespoke control</h3><p>Strong when experienced operators already have reliable automation, monitoring, backup, hardening, and incident processes.</p></article>
-            <article className="is-opslin"><span>Opslin model</span><h3>Managed control plane + your VPS</h3><p>Consider it when provider-neutral infrastructure ownership and Opslin’s released agent workflows match the required scope.</p></article>
-          </div>
-          <p className="mt-6 text-center text-xs text-muted-foreground">Detailed, dated comparisons with Coolify, Dokploy, CapRover, Railway, Render, Heroku, Vercel, and manual VPS operation are the next implementation phase.</p>
+          <SectionHeading
+            kicker="Compare with evidence"
+            title="Choose by responsibility, control, and current requirements."
+            description="Select a provider to compare operating model, infrastructure ownership, deployment scope, storage, scaling, databases, and pricing. The single comparison hub includes official sources, strengths, limitations, and review dates."
+          />
+          <ProviderComparison comparisons={homepageComparisons} />
         </div>
       </section>
 

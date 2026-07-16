@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Check, Info } from "lucide-react";
 import { SiteShell } from "@/components/site/site-shell";
+import { EvergreenStage } from "@/components/site/evergreen-stage";
+import { DemoScenarios } from "@/components/site/interactive-labs";
 import { WorkflowSimulator } from "@/components/site/workflow-simulator";
 import { createMetadata } from "@/lib/metadata";
 
@@ -20,13 +22,14 @@ export default function DemoPage() {
             <h1 className="page-title mt-4">Follow a deployment from source to healthy release.</h1>
             <p className="page-lead mt-5">Click any stage, pause the workflow, or replay it. This demo is deliberately local and does not touch a real server.</p>
           </div>
-          <div className="mx-auto mt-10 max-w-6xl"><WorkflowSimulator /></div>
+          <div className="mx-auto mt-10 max-w-6xl"><EvergreenStage><WorkflowSimulator /></EvergreenStage></div>
           <div className="demo-disclosure mx-auto mt-6 max-w-4xl">
             <Info className="mt-0.5 size-5 shrink-0 text-brand" aria-hidden="true" />
             <p><strong>Simulation only.</strong> No API request, repository connection, agent command, or infrastructure change occurs on this page.</p>
           </div>
         </div>
       </section>
+      <section className="site-section"><div className="site-container"><div className="max-w-3xl"><p className="site-kicker">Choose a local scenario</p><h2 className="site-heading mt-3">Explore more than one workflow shape.</h2><p className="site-description mt-4">Every scenario is deterministic and clearly labelled. It teaches the sequence without presenting fake customer data.</p></div><div className="mt-10"><DemoScenarios /></div></div></section>
       <section className="site-section site-section-tinted">
         <div className="site-container grid gap-5 md:grid-cols-3">
           {["Every stage remains selectable by keyboard", "Progress is announced to assistive technology", "Reduced-motion users receive an instant final state"].map((item) => (

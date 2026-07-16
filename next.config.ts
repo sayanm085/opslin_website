@@ -24,6 +24,13 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
   },
+  async redirects() {
+    return ["coolify", "dokploy", "caprover", "railway", "render", "heroku", "vercel", "manual-vps"].map((provider) => ({
+      source: `/compare/opslin-vs-${provider}`,
+      destination: `/compare?provider=${provider}`,
+      permanent: true,
+    }));
+  },
   async headers() {
     return [{
       source: "/(.*)",

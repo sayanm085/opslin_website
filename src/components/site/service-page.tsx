@@ -1,7 +1,7 @@
 import { ArrowRight, Check, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { SiteShell } from "@/components/site/site-shell";
-import { WorkflowSimulator } from "@/components/site/workflow-simulator";
+import { ServiceVisual } from "@/components/site/service-visual";
 import type { ServiceContent } from "@/lib/marketing-content";
 import { siteLinks } from "@/lib/site-links";
 
@@ -16,7 +16,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
             <h1 className="page-title mt-6">{content.title}</h1>
             <p className="page-lead mt-5">{content.description}</p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <a href={siteLinks.register} className="site-button site-button-primary site-button-lg">Start free<ArrowRight className="size-4" aria-hidden="true" /></a>
+              <a href={siteLinks.register} className="site-button site-button-glass site-button-lg">Start free<ArrowRight className="size-4" aria-hidden="true" /></a>
               <Link href="/demo" className="site-button site-button-secondary site-button-lg">Try the demo</Link>
             </div>
             <ul className="mt-8 grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
@@ -27,7 +27,7 @@ export function ServicePage({ content }: { content: ServiceContent }) {
               ))}
             </ul>
           </div>
-          <WorkflowSimulator compact />
+          <ServiceVisual kind={content.visualKind} />
         </div>
       </section>
 
@@ -69,10 +69,11 @@ export function ServicePage({ content }: { content: ServiceContent }) {
   );
 }
 
-export function ServiceOverviewCard({ href, title, description, icon: Icon }: { href: string; title: string; description: string; icon: LucideIcon }) {
+export function ServiceOverviewCard({ href, title, description, icon: Icon, visualKind }: { href: string; title: string; description: string; icon: LucideIcon; visualKind: ServiceContent["visualKind"] }) {
   return (
     <Link href={href} className="service-overview-card">
-      <div className="bento-icon"><Icon className="size-5" aria-hidden="true" /></div>
+      <div className="flex items-center justify-between"><div className="bento-icon"><Icon className="size-5" aria-hidden="true" /></div><span className="site-badge">Interactive story</span></div>
+      <ServiceVisual kind={visualKind} compact />
       <h2>{title}</h2>
       <p>{description}</p>
       <span>Explore {title}<ArrowRight className="size-4" aria-hidden="true" /></span>

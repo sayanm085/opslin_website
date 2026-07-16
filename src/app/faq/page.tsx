@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ResourceCta, ResourceHero, ResourcePage, ResourceSection } from "@/components/site/resource-page";
 import { createMetadata } from "@/lib/metadata";
 import { siteLinks } from "@/lib/site-links";
+import { FaqExplorer } from "@/components/site/interactive-labs";
 
 export const metadata: Metadata = createMetadata("Frequently Asked Questions — Opslin", "Answers about Opslin hosting, VPS ownership, deployment, domains, databases, billing, security, and beta expectations.", "/faq");
 
@@ -37,9 +38,7 @@ const groups = [
 export default function FaqPage() {
   return <ResourcePage>
     <ResourceHero eyebrow="FAQ" title="Direct answers about the product, its boundaries, and your infrastructure." description="Opslin is designed to reduce operational repetition—not to blur who owns the server, data, security decisions, or provider bill." />
-    <ResourceSection title="Common questions" description="Open a question to see the current public answer.">
-      <div className="space-y-14">{groups.map((group) => <section key={group.title} className="faq-groups"><h2 className="faq-group-label">{group.title}</h2><div className="faq-list">{group.items.map(([question, answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div></section>)}</div>
-    </ResourceSection>
+    <ResourceSection title="Common questions" description="Search or filter by category. All answers are present in the initial page HTML."><FaqExplorer groups={groups} /></ResourceSection>
     <ResourceCta title="Still deciding if the model fits?" description="Run the simulation, read the workflow, and contact Opslin before connecting a critical server." primaryHref="/demo" primaryLabel="Try interactive demo" secondaryHref="/how-it-works" secondaryLabel="See how it works" />
   </ResourcePage>;
 }

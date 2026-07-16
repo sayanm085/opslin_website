@@ -7,6 +7,7 @@ import { siteLinks } from "@/lib/site-links";
 const navigation = [
   { label: "Services", href: "/services" },
   { label: "How it works", href: "/how-it-works" },
+  { label: "Compare", href: "/compare" },
   { label: "Pricing", href: "/pricing" },
   { label: "Demo", href: "/demo" },
   { label: "Docs", href: "/docs" },
@@ -35,7 +36,7 @@ export function SiteHeader() {
           <a href={siteLinks.login} className="site-button site-button-ghost">
             Log in
           </a>
-          <a href={siteLinks.register} className="site-button site-button-primary">
+          <a href={siteLinks.register} className="site-button site-button-glass">
             Start free
             <ArrowUpRight className="size-4" aria-hidden="true" />
           </a>
@@ -52,7 +53,7 @@ export function SiteHeader() {
               </Link>
             ))}
             <a href={siteLinks.login}>Log in</a>
-            <a href={siteLinks.register} className="site-button site-button-primary">
+            <a href={siteLinks.register} className="site-button site-button-glass">
               Start free
             </a>
           </div>
@@ -70,7 +71,7 @@ export function SiteFooter() {
           <div>
             <Brand inverse />
             <p className="mt-4 max-w-sm text-sm leading-6 text-text-on-inverse-muted">
-              Production-ready apps on your own VPS, without stitching together every DevOps tool yourself.
+              Coordinate application deployments and selected server operations on a compatible Linux VPS you control.
             </p>
             <a
               href={`mailto:${siteLinks.contactEmail}`}
@@ -80,7 +81,7 @@ export function SiteFooter() {
               {siteLinks.contactEmail}
             </a>
           </div>
-          <FooterColumn title="Product" links={[...serviceLinks, { label: "Frameworks", href: "/frameworks" }, { label: "VPS compatibility", href: "/vps-providers" }, { label: "Pricing", href: "/pricing" }]} />
+          <FooterColumn title="Product" links={[...serviceLinks, { label: "Frameworks", href: "/frameworks" }, { label: "VPS compatibility", href: "/vps-providers" }, { label: "Compare", href: "/compare" }, { label: "Pricing", href: "/pricing" }]} />
           <FooterColumn
             title="Company"
             links={[

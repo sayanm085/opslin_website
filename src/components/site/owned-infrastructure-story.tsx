@@ -11,7 +11,7 @@ import {
   TerminalSquare,
 } from "lucide-react";
 import { useMotionValueEvent, useReducedMotion, useScroll } from "framer-motion";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useRef, useState, type CSSProperties } from "react";
 import { cn } from "@/lib/utils";
 
 const storyStages = [
@@ -66,10 +66,6 @@ export function OwnedInfrastructureStory() {
     const nextIndex = Math.min(storyStages.length - 1, Math.max(0, Math.floor(value * storyStages.length)));
     setActiveIndex((current) => (current === nextIndex ? current : nextIndex));
   });
-
-  useEffect(() => {
-    if (reduceMotion) setActiveIndex(storyStages.length - 1);
-  }, [reduceMotion]);
 
   const activeStage = storyStages[activeIndex];
   const ActiveIcon = activeStage.icon;

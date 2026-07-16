@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { ArrowDown, Boxes, CloudCog, GitBranch, Globe2, MonitorDot, Server } from "lucide-react";
-import { CheckList, ResourceCta, ResourceHero, ResourcePage, ResourceSection, StepCard } from "@/components/site/resource-page";
+import { ResourceCta, ResourceHero, ResourcePage, ResourceSection } from "@/components/site/resource-page";
 import { WorkflowSimulator } from "@/components/site/workflow-simulator";
+import { WorkflowJourney } from "@/components/site/workflow-journey";
 import { createMetadata } from "@/lib/metadata";
 import { siteLinks } from "@/lib/site-links";
 
@@ -21,9 +22,7 @@ export default function HowItWorksPage() {
     <ResourcePage>
       <ResourceHero eyebrow="How it works" title="A clear path from an empty VPS to a running application." description="Opslin brings the recurring deployment and server operations into one guided workflow while keeping your application on infrastructure you own." aside={<><strong className="text-foreground">The operating model</strong><p className="mt-2">Dashboard → control plane → signed work → outbound agent → your VPS. Results and status flow back into the dashboard.</p></>} />
       <ResourceSection eyebrow="The workflow" title="Six understandable stages. One operational thread." description="Each step keeps the target server, application, deployment, and resulting state connected.">
-        <div className="resource-step-list">
-          {steps.map((step, index) => <StepCard key={step.title} number={`0${index + 1}`} title={step.title} description={step.description}><CheckList items={step.items} /></StepCard>)}
-        </div>
+        <WorkflowJourney steps={steps.map(({ title, description, items }) => ({ title, description, items }))} />
       </ResourceSection>
       <ResourceSection eyebrow="Interactive walkthrough" title="See a deployment progress through the control plane." description="This local simulation mirrors the shape of the workflow. It does not connect to a server or perform a real deployment." tinted>
         <WorkflowSimulator />

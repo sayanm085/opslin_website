@@ -23,7 +23,7 @@ export default function ServicesPage() {
       <section className="site-section site-section-tinted">
         <div className="site-container grid gap-5 md:grid-cols-2">
           {Object.entries(services).map(([slug, service]) => (
-            <ServiceOverviewCard key={slug} href={`/services/${slug}`} title={service.eyebrow} description={service.description} icon={service.icon} />
+            <ServiceOverviewCard key={slug} href={`/services/${slug}`} title={service.eyebrow} description={service.description} icon={service.icon} visualKind={service.visualKind} />
           ))}
         </div>
       </section>

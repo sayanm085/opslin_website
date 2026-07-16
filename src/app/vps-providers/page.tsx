@@ -3,12 +3,14 @@ import { CircleDot, Cpu, HardDrive, Network, Server, ShieldCheck } from "lucide-
 import { Notice, ResourceCard, ResourceCta, ResourceHero, ResourcePage, ResourceSection } from "@/components/site/resource-page";
 import { createMetadata } from "@/lib/metadata";
 import { siteLinks } from "@/lib/site-links";
+import { VpsReadiness } from "@/components/site/interactive-labs";
 
 export const metadata: Metadata = createMetadata("VPS Compatibility — Opslin", "Understand the Linux VPS, networking, access, and resource requirements for connecting a server to Opslin.", "/vps-providers");
 
 export default function VpsProvidersPage() {
   return <ResourcePage>
     <ResourceHero eyebrow="VPS compatibility" title="Provider-neutral by design. Requirements-first by necessity." description="Opslin is built for compatible Linux VPS and cloud virtual machines with a public IP, suitable permissions, networking access, and enough resources for the applications you intend to run." aside={<><span className="site-badge">No provider partnership implied</span><p className="mt-4">Choose and pay your infrastructure provider separately. Opslin does not include the VPS in its plan price.</p></>} />
+    <ResourceSection eyebrow="Readiness explorer" title="Inspect the server boundary before installation." description="Use the interactive preflight to understand the required layers. It is educational, not a real server scan."><VpsReadiness /></ResourceSection>
     <ResourceSection eyebrow="Compatibility checklist" title="What a server needs before you connect it." description="Exact sizing depends on your workloads. Validate these fundamentals before using a server for production.">
       <div className="resource-grid">
         <ResourceCard icon={Server} title="Linux environment" description="A supported, maintained Linux server environment suitable for the agent and Docker-based workloads." />

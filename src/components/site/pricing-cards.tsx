@@ -55,7 +55,7 @@ export function PricingCards() {
                 </li>
               ))}
             </ul>
-            <a href={siteLinks.register} className={plan.featured ? "site-button site-button-primary w-full" : "site-button site-button-secondary w-full"}>
+            <a href={siteLinks.register} className={plan.featured ? "site-button site-button-glass w-full" : "site-button site-button-secondary w-full"}>
               Start with {plan.name}
               <ArrowRight className="size-4" aria-hidden="true" />
             </a>
